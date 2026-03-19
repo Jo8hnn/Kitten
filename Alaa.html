@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Eid 🖤</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            text-align: center;
+            color: #333;
+        }
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease;
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 25px;
+            background: #ff4d6d;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: #ff1e4d;
+        }
+
+        .message {
+            max-width: 600px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+
+        img {
+            width: 260px;
+            border-radius: 20px;
+            margin-top: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease;
+        }
+
+        img.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hearts" id="hearts"></div>
+
+    <!-- PAGE 1 -->
+    <div class="page" id="page1">
+        <h1>Happy Eid Al-Fitr 🖤🌙</h1>
+        <p>I made something small for you...</p>
+        <button onclick="nextPage()">Click me ✨</button>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page hidden" id="page2">
+        <h1>To My Favorite Person 🖤</h1>
+
+        <p class="message">
+            🖤 Alaa 🖤<br><br>
+            🖤 The most amazing and unique girl I know. The sweetest and softest person to ever exist 🖤<br><br>
+            🖤 The only person who has the ability to alter my mood in a second 🖤<br><br>
+            🖤 I wish you an amazing new year kitten, filled with happiness, joy and lots of love 🖤<br><br>
+            🖤 Just like you make my every moment special by simply existing in my mind… 🖤<br><br>
+            🖤 I hope this Eid brings you as much happiness as you do to me 🖤<br><br>
+            🖤 You make everything feel lighter, calmer and just right 🖤<br><br>
+            🖤 جةژنت پيروز 🖤
+        </p>
+
+        <img id="photo" src="your-photo.jpeg" alt="Us">
+    </div>
+
+    <script>
+        /* switch page */
+        function nextPage() {
+            document.getElementById("page1").classList.add("hidden");
+            document.getElementById("page2").classList.remove("hidden");
+
+            // scroll to top of page 2
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        /* floating hearts */
+        const heartsContainer = document.getElementById("hearts");
+
+        for (let i = 0; i < 20; i++) {
+            let heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "🖤";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+            heart.style.fontSize = (15 + Math.random() * 20) + "px";
+            heartsContainer.appendChild(heart);
+        }
+
+        /* fade-in photo */
+        const photo = document.getElementById("photo");
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    photo.classList.add("show");
+                }
+            });
+        }, { threshold: 0.3 });
+
+        observer.observe(photo);
+    </script>
+
+</body>
+
+</html>
